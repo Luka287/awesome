@@ -324,7 +324,7 @@ globalkeys = gears.table.join(
 
 
 
-        -- Show/Hide Wibox
+    -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
             for s in screen do
                 s.mywibox.visible = not s.mywibox.visible

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+xmodmap -e 'keycode 50='
+
+
+
+
+
+
