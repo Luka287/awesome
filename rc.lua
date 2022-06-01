@@ -8,10 +8,10 @@ local awful = require("awful")
 -- Widget and layout library
 local wibox = require("wibox")
 
-local ram_widget = require("ram-widget.ram-widget")
+--local ram_widget = require("ram-widget.ram-widget")
 local batteryarc_widget = require("batteryarc-widget.batteryarc")
 local volume_control = require("volume-control")
-local cpu_widget = require("cpu-widget.cpu-widget")
+--local cpu_widget = require("cpu-widget.cpu-widget")
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -99,15 +99,19 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "hotkedys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "Hotkedys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "Manual", terminal .. " -e man awesome" },
+   { "Edit config", editor_cmd .. " " .. awesome.conffile },
+   { "Open terminal", terminal },
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    {"Sleep", "systemctl suspend"},
+                                    { "Restart", "systemctl reboot" },
+                                    { "Log out", function() awesome.quit() end },
+                                    { "Shut down", "systemctl poweroff" },
+
+
                                   }
                         })
 
@@ -268,8 +272,8 @@ Card: ${card}]],
             volumecfg.widget,
             spacing = 5,
             mytextclock,
-            cpu_widget(),
-            ram_widget(),
+            --cpu_widget(),
+            --ram_widget(),
                batteryarc_widget({
             show_current_level = true,
             arc_thickness = 1,
