@@ -210,6 +210,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
 
+
 -- Volume
 volumecfg = volume_control({
   device  = nil,            -- e.g.: "default", "pulse"
@@ -248,10 +249,6 @@ Card: ${card}]],
     end
 
 
-
-
-
-
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
     beautiful.wibar_height = 23
@@ -261,7 +258,6 @@ Card: ${card}]],
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-
             s.mytaglist,
             s.mypromptbox,
         },
@@ -638,4 +634,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Autostart
 awful.spawn.with_shell("disable_key")
 awful.spawn.with_shell("nm-applet")
+awful.spawn.with_shell("picom --experimental-backends -b")
 awful.spawn.with_shell("kitty")

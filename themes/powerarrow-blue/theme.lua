@@ -16,8 +16,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-blue"
 theme.wallpaper                                 = theme.dir .. "/arch-linux-logo-colorful.jpg"
-theme.font                                      = "Mononoki Nerd Font 9"
-theme.taglist_font                              = "Droid Sans Bold 7"
+theme.font                                      ="Hack Nerd Font Bold 10"
+theme.taglist_font                              = "Droid Sans Bold 8"
 theme.fg_normal                                 = "#ffffff"
 theme.fg_focus                                  = "#A77AC4"
 theme.fg_urgent                                 = "#b74822"
@@ -27,7 +27,7 @@ theme.bg_urgent                                 = "#3F3F3F"
 theme.taglist_fg_focus                          = "#282a36"
 theme.tasklist_bg_focus                         = "#000000"
 theme.tasklist_fg_focus                         = "#A77AC4"
-theme.border_width                              = 2
+theme.border_width                              = 3
 theme.border_normal                             = "#282a36"
 theme.border_focus                              = "#F07178"
 theme.border_marked                             = "#CC9393"
@@ -78,7 +78,7 @@ theme.widget_scissors                           = theme.dir .. "/icons/scissors.
 theme.widget_weather                            = theme.dir .. "/icons/dish.png"
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 4
+theme.useless_gap                               = 5
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
@@ -112,12 +112,6 @@ local clock = awful.widget.watch(
     end
 )
 
-
-
-
-
-
--- Mail IMAP check
 
 
 
