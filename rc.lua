@@ -1,5 +1,5 @@
 -- awesome-C
-
+local os = require("os")
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -273,6 +273,8 @@ Card: ${card}]],
                batteryarc_widget({
             show_current_level = true,
             arc_thickness = 1,
+            
+            
         }),
             --require("battery-widget") {},
             s.mylayoutbox,
