@@ -15,7 +15,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-blue"
-theme.wallpaper                                 = theme.dir .. "/arch-linux-logo-colorful.jpg"
+theme.wallpaper                                 = theme.dir .. "/wallpapers/eNHZ8SG.png"
 theme.font                                      ="Hack Nerd Font Bold 10"
 theme.taglist_font                              = "Droid Sans Bold 8"
 theme.fg_normal                                 = "#ffffff"
