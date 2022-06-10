@@ -266,8 +266,9 @@ Card: ${card}]],
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             volumecfg.widget,
-            spacing = 5,
+            --spacing = 1,
             mytextclock,
+            spacing = 1,
             --cpu_widget(),
             --ram_widget(),
                batteryarc_widget({
@@ -308,6 +309,8 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+
+
 
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 10") end,
@@ -636,5 +639,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Autostart
 awful.spawn.with_shell("disable_key")
 awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("picom --experimental-backends -b")
+awful.spawn.with_shell("picom")
 awful.spawn.with_shell("kitty")
