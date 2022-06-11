@@ -209,7 +209,7 @@ function vwidget:create_menu(callback)
             table.insert(sinks_submenu, {sink.description, function()
                 self:set_default_sink(sink.name)
             end})
-        end
+        end 
         callback(awful.menu { items = {
             { "mute", function() self:mute() end },
             { "unmute", function() self:unmute() end },

@@ -5,6 +5,12 @@
 
 --]]
 
+walp1 = "/wallpapers/arch-01.jpg"
+walp2 = "/wallpapers/arch-02.jpg"
+walp3 = "/wallpapers/arch-03.png"
+walp4 = "/wallpapers/arch-04.jpg"
+walp5 = "/wallpapers/arch-05.jpg"
+
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
@@ -15,7 +21,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-blue"
-theme.wallpaper                                 = theme.dir .. "/wallpapers/eNHZ8SG.png"
+theme.wallpaper                                 = theme.dir .. walp1
 theme.font                                      = "FreeMono.otf 11"
 theme.taglist_font                              = "Droid Sans Mono Bold 8"
 theme.fg_normal                                 = "#ffffff"

@@ -1,5 +1,7 @@
--- awesome-C
-local os = require("os")
+-- awesome
+
+
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -63,7 +65,7 @@ beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -266,7 +268,6 @@ Card: ${card}]],
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             volumecfg.widget,
-            --spacing = 1,
             mytextclock,
             spacing = 1,
             --cpu_widget(),
@@ -274,9 +275,8 @@ Card: ${card}]],
                batteryarc_widget({
             show_current_level = true,
             arc_thickness = 1,
-            
-            
         }),
+            --spacing = 2,
             --require("battery-widget") {},
             s.mylayoutbox,
 
