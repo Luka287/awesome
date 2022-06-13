@@ -1,7 +1,5 @@
 -- awesome
 
-
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -10,10 +8,12 @@ local awful = require("awful")
 -- Widget and layout library
 local wibox = require("wibox")
 
+
 --local ram_widget = require("ram-widget.ram-widget")
 local batteryarc_widget = require("batteryarc-widget.batteryarc")
 local volume_control = require("volume-control")
 --local cpu_widget = require("cpu-widget.cpu-widget")
+local battery_widget = require("battery-widget.battery")
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -269,17 +269,14 @@ Card: ${card}]],
             wibox.widget.systray(),
             volumecfg.widget,
             mytextclock,
-            spacing = 1,
             --cpu_widget(),
             --ram_widget(),
-               batteryarc_widget({
-            show_current_level = true,
-            arc_thickness = 1,
-        }),
-            --spacing = 2,
-            --require("battery-widget") {},
+            battery_widget(),
+--               batteryarc_widget({
+--           show_current_level = true,
+--           arc_thickness = 1,
+--        }),
             s.mylayoutbox,
-
         },
     }
 end)
