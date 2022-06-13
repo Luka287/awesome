@@ -8,9 +8,9 @@ local awful = require("awful")
 -- Widget and layout library
 local wibox = require("wibox")
 
-
+local brightness_widget = require("brightness-widget.brightness")
 --local ram_widget = require("ram-widget.ram-widget")
-local batteryarc_widget = require("batteryarc-widget.batteryarc")
+--local batteryarc_widget = require("batteryarc-widget.batteryarc")
 local volume_control = require("volume-control")
 --local cpu_widget = require("cpu-widget.cpu-widget")
 local battery_widget = require("battery-widget.battery")
@@ -272,10 +272,7 @@ Card: ${card}]],
             --cpu_widget(),
             --ram_widget(),
             battery_widget(),
---               batteryarc_widget({
---           show_current_level = true,
---           arc_thickness = 1,
---        }),
+            brightness_widget{},
             s.mylayoutbox,
         },
     }
@@ -310,11 +307,8 @@ globalkeys = gears.table.join(
 
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 10") end,
-              {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 10") end,
-              {description = "-10%", group = "hotkeys"}),
-
+    awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
+    awful.key({}, "XF86MonBrightnessDown", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
 
     -- dmenu
     awful.key({ modkey }, "p",
