@@ -9,11 +9,11 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 local brightness_widget = require("brightness-widget.brightness")
---local ram_widget = require("ram-widget.ram-widget")
---local batteryarc_widget = require("batteryarc-widget.batteryarc")
-local volume_control = require("volume-control")
---local cpu_widget = require("cpu-widget.cpu-widget")
+local ram_widget = require("ram-widget.ram-widget")
+local cpu_widget = require("cpu-widget.cpu-widget")
 local battery_widget = require("battery-widget.battery")
+local volume_widget = require('volume-widget.volume')
+
 
 -- Theme handling library
 local beautiful = require("beautiful")
@@ -101,13 +101,13 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
-   { "Hotkedys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", terminal .. " -e man awesome" },
    { "Edit config", editor_cmd .. " " .. awesome.conffile },
    { "Open terminal", terminal },
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
                                     {"Sleep", "systemctl suspend"},
                                     { "Restart", "systemctl reboot" },
                                     { "Log out", function() awesome.quit() end },
@@ -212,45 +212,6 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
 
-
--- Volume
-volumecfg = volume_control({
-  device  = nil,            -- e.g.: "default", "pulse"
-  cardid  = nil,            -- e.g.: 0, 1, ...
-  channel = "Master",
-  step    = '5%',           -- step size for up/down
-  lclick  = "toggle",       -- mouse actions described below
-  mclick  = "pavucontrol",
-  rclick  = "pavucontrol",
-  listen  = false,          -- enable/disable listening for audio status changes
-  widget  = nil,        -- use this instead of creating a awful.widget.textbox
-  font    = nil,            -- font used for the widget's text
-  callback = nil,
-  widget_text = {
-    on  = '  Vol:% 3d%% ',        -- three digits, fill with leading spaces
-    off = '  Vol:% 3dM ',
-  },
-  tooltip_text = [[
-Volume: ${volume}% ${state}
-Channel: ${channel}
-Device: ${device}
-Card: ${card}]],
-})
-
-
-
-
-    for i=1, 99 do
-        local w = wibox.widget {
-            first,
-            second,
-            third,
-            spacing = i*90,
-            layout  = wibox.layout.ratio.horizontal
-        }
-    end
-
-
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
     beautiful.wibar_height = 23
@@ -267,20 +228,26 @@ Card: ${card}]],
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            volumecfg.widget,
-            mytextclock,
-            --cpu_widget(),
-            --ram_widget(),
-            battery_widget(),
+	    wibox.widget.textbox("-  "),
+              volume_widget{
+                widget_type = 'arc'
+            },
+	    wibox.widget.textbox("  -  "),
             brightness_widget{},
+
+        wibox.widget.textbox("  - "),
+            ram_widget(),
+	    wibox.widget.textbox(" -  "),
+            cpu_widget(),
+        wibox.widget.textbox("  - "),
+            mytextclock,    
+        wibox.widget.textbox(" -  "),
+            battery_widget(),
+	    wibox.widget.textbox("  -"),
             s.mylayoutbox,
         },
     }
 end)
-
-
-
-
 
 
 
@@ -300,10 +267,9 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
 
     -- Volume
-    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
-    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
-    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
-
+   awful.key({}, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end),
+   awful.key({}, "XF86Au-dioLowerVolume", function() volume_widget:dec(5) end),
+   awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end),
 
 
     -- Brightness
