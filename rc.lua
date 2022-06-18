@@ -227,23 +227,23 @@ awful.screen.connect_for_each_screen(function(s)
          s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+	    wibox.widget.textbox("/"),
             wibox.widget.systray(),
-	    wibox.widget.textbox("-  "),
+	    wibox.widget.textbox("/ - "),
               volume_widget{
                 widget_type = 'arc'
             },
-	    wibox.widget.textbox("  -  "),
+	    wibox.widget.textbox(" - "),
             brightness_widget{},
-
-        wibox.widget.textbox("  - "),
+        wibox.widget.textbox(" - "),
             ram_widget(),
-	    wibox.widget.textbox(" -  "),
+	    wibox.widget.textbox(" - "),
             cpu_widget(),
-        wibox.widget.textbox("  - "),
+        wibox.widget.textbox(" - "),
             mytextclock,    
-        wibox.widget.textbox(" -  "),
+        wibox.widget.textbox(" - "),
             battery_widget(),
-	    wibox.widget.textbox("  -"),
+	    wibox.widget.textbox(" - "),
             s.mylayoutbox,
         },
     }
@@ -268,7 +268,7 @@ globalkeys = gears.table.join(
 
     -- Volume
    awful.key({}, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end),
-   awful.key({}, "XF86Au-dioLowerVolume", function() volume_widget:dec(5) end),
+   awful.key({}, "XF86AudioLowerVolume", function() volume_widget:dec(5) end),
    awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end),
 
 
@@ -279,7 +279,7 @@ globalkeys = gears.table.join(
     -- dmenu
     awful.key({ modkey }, "p",
     function ()
-        awful.spawn(string.format("dmenu_run",
+        awful.spawn(string.format("dmenu_run -h 22",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),

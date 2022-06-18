@@ -225,7 +225,7 @@ local function worker(user_args)
                             forced_width = 150,
                             paddings = 1,
                             margins = 4,
-                            border_width = 1,
+                            border_width = 2,
                             border_color = beautiful.bg_focus,
                             background_color = beautiful.bg_normal,
                             bar_border_width = 1,
