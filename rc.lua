@@ -367,7 +367,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    awful.key({ modkey, crtl }, "n",
+    awful.key({ modkey,           }, "n",
               function ()
                   local c = awful.client.restore()
                   -- Focus restored client
@@ -415,7 +415,7 @@ clientkeys = gears.table.join(
               {description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
-    awful.key({ modkey,           }, "n",
+    awful.key({ modkey, ctrl      }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
@@ -592,9 +592,19 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 
 
-
 -- Autostart
 awful.spawn.with_shell("disable_key")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("kitty")
+
+
+
+-- Garbage collector
+collectgarbage("setpause", 160) -- If memory usage reaches given number gc cycle will start
+collectgarbage("setstepmul", 400) -- Speed of cycle in relative to speed of memory allocation in percentige.
+
+gears.timer.start_new(10, function()
+	collectgarbage("step", 2000)
+	return true
+end)
