@@ -601,7 +601,7 @@ awful.spawn.with_shell("kitty")
 
 
 -- Garbage collector
-collectgarbage("setpause", 160) -- If memory usage reaches given number gc cycle will start
+collectgarbage("setpause", 120) -- If memory usage reaches given number gc cycle will start
 collectgarbage("setstepmul", 400) -- Speed of cycle in relative to speed of memory allocation in percentige.
 
 gears.timer.start_new(10, function()

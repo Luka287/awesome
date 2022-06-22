@@ -10,9 +10,23 @@ walp2 = "/wallpapers/arch-02.jpg"
 walp3 = "/wallpapers/arch-03.png"
 walp4 = "/wallpapers/arch-04.jpg"
 walp5 = "/wallpapers/arch-05.jpg"
+walp6 = "/wallpapers/arch-06.jpg"
+walp7 = "/wallpapers/arch-07.jpg"
+walp8 = "/wallpapers/arch-08.jpg"
+walp9 = "/wallpapers/arch-09.jpg"
+walp10 = "/wallpapers/arch-10.jpg"
+walp11 = "/wallpapers/arch-11.jpg"
+walp12 = "/wallpapers/arch-12.jpg"
+walp13 = "/wallpapers/arch-13.jpg"
+walp14 = "/wallpapers/arch-14.jpg"
+walp15 = "/wallpapers/arch-15.jpg"
+walp16 = "/wallpapers/arch-16.jpg"
+walp17 = "/wallpapers/arch-17.jpg"
+walp18 = "/wallpapers/arch-18.jpg"
+walp19 = "/wallpapers/arch-19.jpg"
+walp20 = "/wallpapers/arch-20.jpg"
 
 local gears = require("gears")
-local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 
@@ -21,11 +35,11 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-blue/"
-theme.wallpaper                                 = theme.dir .. walp3
-theme.font                                      = "Spleen Regular 11" --"FreeMono.otf 11"
-theme.taglist_font                              = "Spleen Bold 9" --"Droid Sans Mono Bold 8"
+theme.wallpaper                                 = theme.dir .. walp9
+theme.font                                      = "DroidSansMono Nf Bold 11"
+theme.taglist_font                              = "Spleen 32x64 Bold 9"
 theme.fg_normal                                 = "#ffffff"
-theme.fg_focus                                  = "#A77AC4"
+theme.fg_focus                                  = "#000000"
 theme.fg_urgent                                 = "#b74822"
 theme.bg_normal                                 = "#282a36"
 theme.bg_focus                                  = "#dfdfdf"
@@ -103,105 +117,5 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
-
-local markup = lain.util.markup
-local separators = lain.util.separators
-
-
--- Textclock
-local clockicon = wibox.widget.imagebox(theme.widget_clock)
-local clock = awful.widget.watch(
-    "date +'%a %d %b %R'", 60,
-    function(widget, stdout)
-        widget:set_markup(" " .. markup.font(theme.font, stdout))
-    end
-)
-
-
-
-
--- Separators
-local arrow = separators.arrow_left
-
-function theme.powerline_rl(cr, width, height)
-    local arrow_depth, offset = height/2, 0
-
-    -- Avoid going out of the (potential) clip area
-    if arrow_depth < 0 then
-        width  =  width + 2*arrow_depth
-        offset = -arrow_depth
-    end
-
-    cr:move_to(offset + arrow_depth         , 0        )
-    cr:line_to(offset + width               , 0        )
-    cr:line_to(offset + width - arrow_depth , height/2 )
-    cr:line_to(offset + width               , height   )
-    cr:line_to(offset + arrow_depth         , height   )
-    cr:line_to(offset                       , height/2 )
-
-    cr:close_path()
-end
-
-local function pl(widget, bgcolor, padding)
-    return wibox.container.background(wibox.container.margin(widget, 16, 16), bgcolor, theme.powerline_rl)
-end
-
-function theme.at_screen_connect(s)
-    -- Quake application
-   -- s.quake = lain.util.quake({ app = awful.util.terminal })
-   s.quake = lain.util.quake({ app = "kitty", height = 0.50, argname = "--name %s" })
-
-
-
-    -- If wallpaper is a function, call it with the screen
-    local wallpaper = theme.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
-
-    -- All tags open with layout 1
-    awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(my_table.join(
-                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
-
-    -- Create a tasklist widget
-    --s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 20, bg = theme.bg_normal, fg = theme.fg_normal })
-
-     beautiful.wibar_border_width = 5
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            --spr,
-            s.mytaglist,
-            s.mypromptbox,
-            spr,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-
-            s.mylayoutbox,
-        },
-    }
-end
 
 return theme
