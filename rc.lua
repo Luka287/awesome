@@ -15,7 +15,8 @@ local battery_widget = require("battery-widget.battery")
 local volume_widget = require('volume-widget.volume')
 
 
--- Theme handling library
+
+-- Theme handling library 
 local beautiful = require("beautiful")
 
 -- Notification library
