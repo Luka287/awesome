@@ -13,6 +13,7 @@ local ram_widget = require("ram-widget.ram-widget")
 local cpu_widget = require("cpu-widget.cpu-widget")
 local battery_widget = require("battery-widget.battery")
 local volume_widget = require('volume-widget.volume')
+local net_speed_widget = require("net-speed-widget.net-speed")
 
 
 
@@ -81,7 +82,7 @@ ctrl = "Control"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    --awful.layout.suit.floating,
+    awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
@@ -193,7 +194,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "  1  ", "  2  ", "  3  ", "  4  ", "  5  ", "  6  ", "  7  ", "  8  ", "  9  " }, s, awful.layout.layouts[1])
+    awful.tag({ "   1   ", "   2   ", "   3   ", "   4   ", "   5   ", "   6   ", "   7   ", "   8   ", "   9   " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -237,9 +238,15 @@ awful.screen.connect_for_each_screen(function(s)
 	    wibox.widget.textbox(" - "),
             brightness_widget{},
         wibox.widget.textbox(" - "),
-            ram_widget(),
+            ram_widget({
+		    widget_show_buf = false
+	    }),
 	    wibox.widget.textbox(" - "),
-            cpu_widget(),
+            cpu_widget({
+		    width = 60,
+		    enable_kill_button = true,
+		    step_width = 2
+	    }),
         wibox.widget.textbox(" - "),
             mytextclock,    
         wibox.widget.textbox(" - "),
@@ -280,7 +287,7 @@ globalkeys = gears.table.join(
     -- dmenu
     awful.key({ modkey }, "p",
     function ()
-        awful.spawn(string.format("dmenu_run -h 22",
+        awful.spawn(string.format("dmenu_run -h 23",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),
@@ -540,18 +547,13 @@ awful.rules.rules = {
         },
         class = {
 
-        name = {
+        name ={
 
         },
         role = {
          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
       }, properties = { floating = true }},
-
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
-    },
 
 }
 -- }}}
@@ -598,7 +600,6 @@ awful.spawn.with_shell("disable_key")
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("kitty")
-
 
 
 -- Garbage collector
