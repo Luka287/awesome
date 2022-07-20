@@ -4,7 +4,7 @@ This is my config of awesomewm. This repo is under MIT licence.
 
 ## Installation guide
 
-All you need to setup config is to cd into .config file and clone repo there:
+All you need to setup config is to cd into .config folder and clone repo there:
 
 > cd ~/.config
 

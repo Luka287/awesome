@@ -26,7 +26,7 @@ local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table
 
 local theme                                     = {}
-theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-blue/"
+theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/darkblue-arrow/"
 theme.wallpaper                                 = theme.dir .. walp6
 theme.font                                      = "DroidSansMono Nf Bold 11"
 theme.taglist_font                              = "Spleen 32x64 Bold 9"

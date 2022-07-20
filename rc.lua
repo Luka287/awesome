@@ -13,7 +13,6 @@ local ram_widget = require("ram-widget.ram-widget")
 local cpu_widget = require("cpu-widget.cpu-widget")
 local battery_widget = require("battery-widget.battery")
 local volume_widget = require('volume-widget.volume')
-local net_speed_widget = require("net-speed-widget.net-speed")
 
 
 
@@ -22,7 +21,6 @@ local beautiful = require("beautiful")
 
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 -- Enable hotkeys help widget for VIM and other apps
@@ -57,7 +55,7 @@ end
 -- {{{ Variable definitions
 --Theme
 local themes = {
-    "powerarrow-blue", -- 1
+    "darkblue-arrow", -- 1
 }
 -- choose your theme here
 local chosen_theme = themes[1]
@@ -67,6 +65,8 @@ beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
+browser = "librewolf"
+password_manager = "keepassxc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -82,7 +82,7 @@ ctrl = "Control"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
@@ -106,7 +106,7 @@ myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", terminal .. " -e man awesome" },
    { "Edit config", editor_cmd .. " " .. awesome.conffile },
-   { "Open terminal", terminal },
+   { "Terminal", terminal },
 }
 
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
@@ -123,8 +123,6 @@ mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesom
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu})
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -218,6 +216,9 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", screen = s })
     beautiful.wibar_height = 23
 
+s.systray = wibox.widget.systray()
+
+
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -228,30 +229,43 @@ awful.screen.connect_for_each_screen(function(s)
         },
          s.mytasklist, -- Middle widget
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-	    wibox.widget.textbox("/"),
-            wibox.widget.systray(),
-	    wibox.widget.textbox("/ - "),
-              volume_widget{
+        layout = wibox.layout.fixed.horizontal,
+       
+            ram_widget({
+		        widget_show_buf = false
+	        }),
+
+	wibox.widget.textbox(" - "),
+
+            volume_widget{
                 widget_type = 'arc'
             },
-	    wibox.widget.textbox(" - "),
+
+        wibox.widget.textbox(" - "),
+
             brightness_widget{},
-        wibox.widget.textbox(" - "),
-            ram_widget({
-		    widget_show_buf = false
-	    }),
-	    wibox.widget.textbox(" - "),
-            cpu_widget({
-		    width = 60,
-		    enable_kill_button = true,
-		    step_width = 2
-	    }),
-        wibox.widget.textbox(" - "),
-            mytextclock,    
-        wibox.widget.textbox(" - "),
+         
+	wibox.widget.textbox(" - "),
+
             battery_widget(),
-	    wibox.widget.textbox(" - "),
+            
+        wibox.widget.textbox(" - "),
+
+            mytextclock,
+        
+        wibox.widget.textbox(" - "),
+        
+            cpu_widget({
+		        width = 65,
+		        step_width = 2
+	        }),
+
+	wibox.widget.textbox(" - /"),
+        
+            wibox.widget.systray(),
+	   
+	wibox.widget.textbox("/ - "),
+
             s.mylayoutbox,
         },
     }
@@ -292,6 +306,12 @@ globalkeys = gears.table.join(
 	end,
     {description = "show dmenu", group = "hotkeys"}),
 
+    -- screenshot
+   awful.key({ modkey, ctrl }, "s",
+   function ()
+	   awful.spawn(string.format("shotgun"))
+   end,
+   {description = "screenshot", group = "hotkeys"}),
 
 
     -- Show/Hide Wibox
@@ -353,6 +373,8 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({modkey,		  }, "v", function () awful.spawn(browser) end,
+    	      {description = "open a browser", group = "launcher"}),
     awful.key({ modkey }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -400,10 +422,7 @@ globalkeys = gears.table.join(
                     history_path = awful.util.get_cache_dir() .. "/history_eval"
                   }
               end,
-              {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "o", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "lua execute prompt", group = "awesome"})
 )
 
 clientkeys = gears.table.join(
