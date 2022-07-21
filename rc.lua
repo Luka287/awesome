@@ -57,9 +57,10 @@ end
 local themes = {
     "darkblue-arrow", -- 1
     "snow", --2
+    "blackburn", --3
 }
 -- choose your theme here
-local chosen_theme = themes[2]
+local chosen_theme = themes[1]
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
 
@@ -71,11 +72,6 @@ password_manager = "keepassxc"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 altkey = "Mod1"
 ctrl = "Control"
@@ -298,6 +294,17 @@ globalkeys = gears.table.join(
     -- Brightness
     awful.key({ }, "XF86MonBrightnessUp", function () brightness_widget:inc() end, {description = "increase brightness", group = "custom"}),
     awful.key({}, "XF86MonBrightnessDown", function () brightness_widget:dec() end, {description = "decrease brightness", group = "custom"}),
+    
+    -- Keyboard backlight
+    awful.key({ }, "XF86KbdBrightnessUp", function () 
+	    awful.spawn(string.format("brightnessctl --device='smc::kbd_backlight' set +20"))
+    	end,
+    {description = "keyboard light up", group = "hotkeys"}),
+
+    awful.key({ }, "XF86KbdBrightnessDown", function () 
+	    awful.spawn(string.format("brightnessctl --device='smc::kbd_backlight' set 20-"))
+    	end,
+    {description = "keyboard light down", group = "hotkeys"}),
 
     -- dmenu
     awful.key({ modkey }, "p",
