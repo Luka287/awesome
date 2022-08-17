@@ -236,7 +236,7 @@ s.systray = wibox.widget.systray()
 
             volume_widget{
                 widget_type = 'arc',
-		device = 'default'
+		device = 'default',
             },
 
         wibox.widget.textbox(" - "),
