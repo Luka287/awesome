@@ -5,18 +5,19 @@
 
 --]]
 
-walp1 = "/wallpapers/arch-01.jpg"
-walp2 = "/wallpapers/arch-02.jpg"
-walp3 = "/wallpapers/arch-03.png"
-walp4 = "/wallpapers/arch-04.jpg"
-walp5 = "/wallpapers/arch-05.jpg"
-walp6 = "/wallpapers/arch-06.jpg"
-walp7 = "/wallpapers/arch-07.jpg"
-walp8 = "/wallpapers/arch-08.jpg"
-walp9 = "/wallpapers/arch-09.jpg"
-walp10 = "/wallpapers/arch-10.jpg"
-walp11 = "/wallpapers/arch-11.jpg"
-walp12 = "/wallpapers/arch-12.jpg"
+walp1 = "/wallpapers/walp-01.png"
+walp2 = "/wallpapers/walp-02.jpg"
+walp3 = "/wallpapers/walp-03.jpg"
+walp4 = "/wallpapers/walp-04.png"
+walp5 = "/wallpapers/walp-05.jpg"
+walp6 = "/wallpapers/walp-06.jpg"
+walp7 = "/wallpapers/walp-07.jpg"
+walp8 = "/wallpapers/walp-08.jpg"
+walp9 = "/wallpapers/walp-09.jpg"
+walp10 = "/wallpapers/walp-10.jpg"
+walp11 = "/wallpapers/walp-11.jpg"
+walp12 = "/wallpapers/walp-12.jpg"
+walp13 = "/wallpapers/walp-13.png"
 
 local gears = require("gears")
 local awful = require("awful")
@@ -27,8 +28,8 @@ local my_table = awful.util.table or gears.table
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/darkblue-arrow/"
-theme.wallpaper                                 = theme.dir .. walp6
-theme.font                                      = "DroidSansMono Nf Bold 11"
+theme.wallpaper                                 = theme.dir .. walp7
+theme.font                                      = "DroidSansMono Nf Bold 10.5"
 theme.taglist_font                              = "Spleen 32x64 Bold 9"
 theme.fg_normal                                 = "#ffffff"
 theme.fg_focus                                  = "#000000"
@@ -59,36 +60,9 @@ theme.layout_tileleft                           = theme.dir .. "/icons/tileleft.
 theme.layout_tilebottom                         = theme.dir .. "/icons/tilebottom.png"
 theme.layout_tiletop                            = theme.dir .. "/icons/tiletop.png"
 
-theme.layout_fairv                              = theme.dir .. "/icons/fairv.png"
-theme.layout_fairh                              = theme.dir .. "/icons/fairh.png"
-theme.layout_spiral                             = theme.dir .. "/icons/spiral.png"
-theme.layout_dwindle                            = theme.dir .. "/icons/dwindle.png"
-theme.layout_max                                = theme.dir .. "/icons/max.png"
-theme.layout_fullscreen                         = theme.dir .. "/icons/fullscreen.png"
-theme.layout_magnifier                          = theme.dir .. "/icons/magnifier.png"
-theme.layout_floating                           = theme.dir .. "/icons/floating.png"
-
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 6
+theme.useless_gap                               = 9
 
-theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
-theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
-theme.titlebar_ontop_button_focus_active        = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
-theme.titlebar_ontop_button_normal_active       = theme.dir .. "/icons/titlebar/ontop_normal_active.png"
-theme.titlebar_ontop_button_focus_inactive      = theme.dir .. "/icons/titlebar/ontop_focus_inactive.png"
-theme.titlebar_ontop_button_normal_inactive     = theme.dir .. "/icons/titlebar/ontop_normal_inactive.png"
-theme.titlebar_sticky_button_focus_active       = theme.dir .. "/icons/titlebar/sticky_focus_active.png"
-theme.titlebar_sticky_button_normal_active      = theme.dir .. "/icons/titlebar/sticky_normal_active.png"
-theme.titlebar_sticky_button_focus_inactive     = theme.dir .. "/icons/titlebar/sticky_focus_inactive.png"
-theme.titlebar_sticky_button_normal_inactive    = theme.dir .. "/icons/titlebar/sticky_normal_inactive.png"
-theme.titlebar_floating_button_focus_active     = theme.dir .. "/icons/titlebar/floating_focus_active.png"
-theme.titlebar_floating_button_normal_active    = theme.dir .. "/icons/titlebar/floating_normal_active.png"
-theme.titlebar_floating_button_focus_inactive   = theme.dir .. "/icons/titlebar/floating_focus_inactive.png"
-theme.titlebar_floating_button_normal_inactive  = theme.dir .. "/icons/titlebar/floating_normal_inactive.png"
-theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/maximized_focus_active.png"
-theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
-theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
-theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
 return theme

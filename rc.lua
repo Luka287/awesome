@@ -284,6 +284,13 @@ root.buttons(gears.table.join(
 
 
 globalkeys = gears.table.join(
+    
+    -- Screen lock 
+    awful.key({}, "Scroll_Lock", function ()
+	    awful.spawn(string.format("i3lock"))
+    end,
+    {description = "lock screen", group = "hotkeys"}),
+
 
     -- Volume
    awful.key({}, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end),
@@ -309,7 +316,7 @@ globalkeys = gears.table.join(
     -- dmenu
     awful.key({ modkey }, "p",
     function ()
-        awful.spawn(string.format("dmenu_run -h 23",
+        awful.spawn(string.format("dmenu_run -h 28",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),
@@ -628,6 +635,10 @@ awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("picom")
 awful.spawn.with_shell("kitty")
 
+-- screenlock 
+awful.spawn.with_shell("xss-lock --transfer-sleep-lock -- i3lock --nofork")
+awful.spawn.with_shell("xset dpms 0 0 300")
+awful.spawn.with_shell("xss-lock i3lock +resetsaver")
 
 -- Garbage collector
 collectgarbage("setpause", 120) -- If memory usage reaches given number gc cycle will start
