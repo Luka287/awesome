@@ -14,8 +14,6 @@ local cpu_widget = require("cpu-widget.cpu-widget")
 local battery_widget = require("battery-widget.battery")
 local volume_widget = require('volume-widget.volume')
 
-
-
 -- Theme handling library 
 local beautiful = require("beautiful")
 
@@ -107,11 +105,11 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
-                                    {"Sleep", "systemctl suspend"},
+                                    { "Sleep", "systemctl suspend"},
                                     { "Restart", "systemctl reboot" },
+				    { "Lock screen", "i3lock"  },
                                     { "Log out", function() awesome.quit() end },
                                     { "Shut down", "systemctl poweroff" },
-
 
                                   }
                         })
@@ -648,3 +646,5 @@ gears.timer.start_new(10, function()
 	collectgarbage("step", 2000)
 	return true
 end)
+ 
+
