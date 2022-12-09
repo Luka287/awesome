@@ -310,7 +310,7 @@ globalkeys = gears.table.join(
     -- dmenu
     awful.key({ modkey }, "p",
     function ()
-        awful.spawn(string.format("dmenu_run -h 23",
+        awful.spawn(string.format("dmenu_run -h 25",
         beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
 	end,
     {description = "show dmenu", group = "hotkeys"}),

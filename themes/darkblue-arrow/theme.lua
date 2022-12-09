@@ -28,8 +28,8 @@ local my_table = awful.util.table or gears.table
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/darkblue-arrow/"
 theme.wallpaper                                 = theme.dir .. walp6
-theme.font                                      = "DroidSansMono Nerd Font Bold 11"
-theme.taglist_font                              = "Spleen 32x64 Bold 9"
+theme.font                                      = "Spleen 32x64 Bold 13"
+theme.taglist_font                              = "Spleen 32x64 Bold 10"
 theme.fg_normal                                 = "#ffffff"
 theme.fg_focus                                  = "#000000"
 theme.fg_urgent                                 = "#a7171a"
@@ -70,7 +70,7 @@ theme.layout_floating                           = theme.dir .. "/icons/floating.
 
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
-theme.useless_gap                               = 6
+theme.useless_gap                               = 10
 
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"
