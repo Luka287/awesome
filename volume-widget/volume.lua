@@ -70,7 +70,7 @@ local function build_rows(devices, on_checkbox_click, device_type)
         }
 
         checkbox:connect_signal("button::press", function()
-            spawn.easy_async(string.format([[sh -c 'pacmd set-default-%s "%s"']], device_type, device.name), function()
+            spawn.easy_async(string.format([[sh -c 'pacmd set-default-%s "%s"']], device_type, device.name), function() 
                 on_checkbox_click()
             end)
         end)

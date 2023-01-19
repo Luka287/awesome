@@ -17,6 +17,9 @@ walp9 = "/wallpapers/arch-09.jpg"
 walp10 = "/wallpapers/arch-10.jpg"
 walp11 = "/wallpapers/arch-11.jpg"
 walp12 = "/wallpapers/arch-12.jpg"
+walp13 = "/wallpapers/arch-13.jpg"
+walp14 = "/wallpapers/arch-14.png"
+walp15 = "/wallpapers/arch-15.png"
 
 local gears = require("gears")
 local awful = require("awful")
@@ -27,7 +30,7 @@ local my_table = awful.util.table or gears.table
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/darkblue-arrow/"
-theme.wallpaper                                 = theme.dir .. walp6
+theme.wallpaper                                 = theme.dir .. walp14
 theme.font                                      = "Spleen 32x64 Bold 13"
 theme.taglist_font                              = "Spleen 32x64 Bold 10"
 theme.fg_normal                                 = "#ffffff"
@@ -40,7 +43,7 @@ theme.taglist_fg_focus                          = "#1d1e22"
 theme.tasklist_bg_focus                         = "#000000"
 theme.tasklist_fg_focus                         = "#A77AC4"
 theme.border_width                              = 2
-theme.border_normal                             = "#282a36"
+theme.border_normal                             = "#1f2430"
 theme.border_focus                              = "#dfdfdf"
 theme.border_marked                             = "#dfdfdf"
 theme.titlebar_bg_focus                         = "#3F3F3F"
